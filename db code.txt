@@ -74,7 +74,6 @@ key = hireaprokey
 
 id1347871_hire_a_pro
 
-https://real-communication.000webhostapp.com/hireapro/connection.php
 
 INSERT INTO users_primary (`user_id`,`name`,`phone_no`,`date_user_added`,`time_user_added`,`password`)
 		VALUES ('ID101','Himanshu','7042760488',CURDATE(),CONVERT_TZ(curtime(),'+00:00','+06:30'),DES_ENCRYPT('qwerty123456','hireaprokey'));
