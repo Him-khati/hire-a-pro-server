@@ -18,7 +18,8 @@ CREATE TABLE professionals_primary(
             password varchar(32) not null,
             job_id varchar(10) not null,
             date_pro_added date not null,
-            time_pro_added time not null
+            time_pro_added time not null,
+			base_rate float(4.2) not null
                                  );
 
 
