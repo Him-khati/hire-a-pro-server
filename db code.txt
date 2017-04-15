@@ -1,0 +1,83 @@
+CREATE DATABASE hire_a_pro;
+
+USE hire_a_pro;
+
+
+CREATE TABLE security_questions (
+            security_ques_id varchar(10) primary key,
+            security_question varchar(50) not null unique); 
+
+CREATE TABLE jobs (job_id varchar(10) primary key,
+            job_name varchar(50) not null unique); 
+
+CREATE TABLE professionals_primary(
+            pro_id varchar(10) primary key,
+            name varchar(40) not null,
+            email_id varchar(20) unique,
+            phone_no BIGINT unique not null,
+            password varchar(32) not null,
+            job_id varchar(10) not null,
+            date_pro_added date not null,
+            time_pro_added time not null
+                                 );
+
+
+CREATE TABLE professionals_secondary(
+            pro_id varchar(10) unique not null,
+            phone_no_secondary BIGINT unique,
+            base_location_latitude double,
+            base_location_longitude double,
+            address varchar(200) not null,
+            security_ques_id varchar(10),
+            security_answer varchar(32),        
+            specialization varchar(30) 
+ );
+
+ALTER TABLE professionals_primary ADD CONSTRAINT fk_job_id FOREIGN KEY (job_id) REFERENCES jobs(job_id);
+
+ALTER TABLE professionals_secondary ADD CONSTRAINT fk_security_ques_id FOREIGN KEY (security_ques_id) REFERENCES security_questions(security_ques_id);
+
+ALTER TABLE professionals_secondary ADD CONSTRAINT fk_proid FOREIGN KEY (pro_id) REFERENCES professionals_primary(pro_id);
+
+
+CREATE TABLE users_primary(
+            user_id varchar(10) primary key,
+            name varchar(40) not null,
+            email_id varchar(20) unique,
+            phone_no BIGINT unique ,
+            date_user_added date not null,
+            time_user_added time not null,
+            password varchar(32) not null
+            
+ );
+
+
+CREATE TABLE users_secondary(
+            user_id varchar(10) not null unique,
+            phone_no_secondary BIGINT unique,
+            base_location_latitude double,
+            base_location_longitude double,
+            address varchar(200) ,  
+            security_ques_id varchar(10),
+            security_answer varchar(32)
+            
+ );
+
+ALTER TABLE users_secondary ADD CONSTRAINT fk_security_ques_id2 FOREIGN KEY (security_ques_id) REFERENCES security_questions(security_ques_id);
+
+ALTER TABLE users_secondary ADD CONSTRAINT fk_userid FOREIGN KEY (user_id) REFERENCES users_primary(user_id);
+
+
+
+
+key = hireaprokey
+
+id1347871_hire_a_pro
+
+https://real-communication.000webhostapp.com/hireapro/connection.php
+
+INSERT INTO users_primary (`user_id`,`name`,`phone_no`,`date_user_added`,`time_user_added`,`password`)
+		VALUES ('ID101','Himanshu','7042760488',CURDATE(),CONVERT_TZ(curtime(),'+00:00','+06:30'),DES_ENCRYPT('qwerty123456','hireaprokey'));
+
+
+https://real-communication.000webhostapp.com/hireapro/registeruser_api.php?name=himanshu&phone_no=9917794421&password=qazwsxedc
