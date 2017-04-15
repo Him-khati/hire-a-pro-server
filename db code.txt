@@ -68,7 +68,18 @@ ALTER TABLE users_secondary ADD CONSTRAINT fk_security_ques_id2 FOREIGN KEY (sec
 
 ALTER TABLE users_secondary ADD CONSTRAINT fk_userid FOREIGN KEY (user_id) REFERENCES users_primary(user_id);
 
+CREATE TABLE `pro_reviews` (
+  `review_id` varchar(10) NOT NULL primary key,
+  `pro_reviwed_id` varchar(10) not null unique,
+  `reviewer_id` varchar(10)  NOT NULL,
+  `rating` tinyint(1) NOT NULL,
+  `review` mediumtext NOT NULL,
+  `review_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `helpful up` int,
+  `helpful_down` int
+);
 
+ALTER TABLE `pro_reviews` ADD CONSTRAINT fk_pro_id FOREIGN KEY (pro_reviwed_id) REFERENCES professionals_primary(pro_id);
 
 
 key = hireaprokey
