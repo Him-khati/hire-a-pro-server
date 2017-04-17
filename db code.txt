@@ -70,14 +70,40 @@ ALTER TABLE users_secondary ADD CONSTRAINT fk_userid FOREIGN KEY (user_id) REFER
 
 CREATE TABLE `pro_reviews` (
   `review_id` varchar(10) NOT NULL primary key,
-  `pro_reviwed_id` varchar(10) not null unique,
+  `pro_reviewed_id` varchar(10) not null unique,
   `reviewer_id` varchar(10)  NOT NULL,
   `rating` tinyint(1) NOT NULL,
   `review` mediumtext NOT NULL,
   `review_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `helpful up` int,
-  `helpful_down` int
+  `helpful up` int default 0,
+  `helpful_down` int default 0
 );
+
+ALTER TABLE pro_reviews ADD CONSTRAINT fk_pro_reviews_id1 FOREIGN KEY (pro_reviewed_id) REFERENCES professionals_primary(pro_id);
+
+ALTER TABLE pro_reviews ADD CONSTRAINT fk_pro_reviewer_id1 FOREIGN KEY (reviewer_id) REFERENCES users_primary(user_id);
+
+CREATE TABLE `reviews_ups` (
+  `review_id` varchar(10) NOT NULL ,
+  `up_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `helpful_up_user_id` varchar(10)
+);
+
+ALTER TABLE reviews_ups ADD CONSTRAINT fk_up_review_id1 FOREIGN KEY (review_id) REFERENCES pro_reviews(review_id);
+
+ALTER TABLE reviews_ups ADD CONSTRAINT fk_up_reviewer_id1 FOREIGN KEY (helpful_up_user_id) REFERENCES users_primary(user_id);
+
+
+
+CREATE TABLE `reviews_downs` (
+  `review_id` varchar(10) NOT NULL ,
+  `down_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `helpful_down_user_id` varchar(10)
+);
+
+ALTER TABLE reviews_downs ADD CONSTRAINT fk_down_review_id1 FOREIGN KEY (review_id) REFERENCES pro_reviews(review_id);
+
+ALTER TABLE reviews_downs ADD CONSTRAINT fk_down_reviewer_id1 FOREIGN KEY (helpful_down_user_id) REFERENCES users_primary(user_id);
 
 ALTER TABLE `pro_reviews` ADD CONSTRAINT fk_pro_id FOREIGN KEY (pro_reviwed_id) REFERENCES professionals_primary(pro_id);
 
