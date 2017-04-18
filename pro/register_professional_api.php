@@ -29,7 +29,7 @@ if(!(empty($_GET['name']) || empty($_GET['phone_no']) || empty($_GET['password']
                           } 
                         }
                         else{
-                              deliver_response(400,mysqli_error($conn),"NULL"); 
+                              deliver_response(400,mysqli_error($con),"NULL"); 
                                 }
             
 }
