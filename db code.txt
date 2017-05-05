@@ -119,3 +119,31 @@ INSERT INTO users_primary (`user_id`,`name`,`phone_no`,`date_user_added`,`time_u
 
 
 https://real-communication.000webhostapp.com/hireapro/registeruser_api.php?name=himanshu&phone_no=9917794421&password=qazwsxedc
+
+SELECT A.pro_id,A.name,A.base_rate,B.`base_location_latitude`,B.`base_location_longitude`
+FROM professionals_primary A ,professionals_secondary B,jobs C
+WHERE A.pro_id=B.pro_id AND A.job_id=C.job_id AND C.job_name="Plumber";
+
+28.3803594,77.3313892
+
+
+SELECT 
+   111.111 *
+    DEGREES(ACOS(COS(RADIANS(29.641020))
+         * COS(RADIANS(29.643362))
+         * COS(RADIANS(79.412011 - 79.432182))
+         + SIN(RADIANS(29.641020))
+         * SIN(RADIANS(29.643362)))) AS distance_in_km;
+
+
+SELECT a.city AS from_city, b.city AS to_city, 
+   111.111 *
+    DEGREES(ACOS(COS(RADIANS(a.Latitude))
+         * COS(RADIANS(b.Latitude))
+         * COS(RADIANS(a.Longitude - b.Longitude))
+         + SIN(RADIANS(a.Latitude))
+         * SIN(RADIANS(b.Latitude)))) AS distance_in_km
+  FROM city AS a
+  JOIN city AS b ON a.id <> b.id
+ WHERE a.city = 3 AND b.city = 7
+
